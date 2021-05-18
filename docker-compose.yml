@@ -1,0 +1,34 @@
+version: "3.5"
+services:
+    yubikey-ksm:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        environment:
+            MYSQL_HOST: ${MYSQL_KSM_HOST}
+            MYSQL_PORT: ${MYSQL_KSM_PORT}
+            MYSQL_ROOT_USER: ${MYSQL_KSM_ROOT_USER}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_KSM_ROOT_PASSWORD}
+            YKKSM_READER_DB_PASSWORD: ${YKKSM_READER_DB_PASSWORD}
+            YKKSM_IMPORTER_DB_PASSWORD: ${YKKSM_IMPORTER_DB_PASSWORD}
+            TZ: ${TZ}
+        networks:
+            - ykksm-network
+        ports:
+            - 5005:80
+    db-ksm:
+        image: mariadb
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_KSM_ROOT_PASSWORD}
+        volumes:
+            - ./data/mysql-ksm:/var/lib/mysql
+        networks:
+            - ykksm-network
+        ports:
+            - 3309:3306
+networks:
+    ykksm-network:
+        driver: bridge
+
