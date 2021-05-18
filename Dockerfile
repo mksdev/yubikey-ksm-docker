@@ -4,8 +4,11 @@ ENV MYSQL_ROOT_USER=""
 ENV MYSQL_ROOT_PASSWORD=""
 ENV MYSQL_HOST=""
 ENV MYSQL_PORT=""
-ENV YKKSM_READER_DB_PASSWORD=""
-ENV YKKSM_IMPORTER_DB_PASSWORD=""
+ENV YKKSM_DB_NAME="ykksm"
+ENV YKKSM_READER_DB_USER_NAME="ykksmreader"
+ENV YKKSM_READER_DB_USER_PASSWORD=""
+ENV YKKSM_IMPORTER_DB_USER_NAME="ykksmimporter"
+ENV YKKSM_IMPORTER_DB_USER_PASSWORD=""
 
 ENV TZ=Europe/Prague
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -42,7 +45,7 @@ RUN a2enmod rewrite
 RUN ln -s /usr/local/bin/php /usr/bin/php
 
 RUN mkdir /yubico
-COPY ./yubico/yubikey-ksm /yubico/yubikey-ksm
+COPY ./yubikey-ksm /yubico/yubikey-ksm
 
 # ykksm install
 RUN cd /yubico/yubikey-ksm && /usr/bin/make install && /usr/bin/make symlink

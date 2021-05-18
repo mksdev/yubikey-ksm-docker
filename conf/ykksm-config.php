@@ -1,6 +1,6 @@
 <?php
-$dbuser = 'ykksmreader';
-$dbpass = getenv('YKKSM_READER_DB_PASSWORD');
+$dbuser = getenv('YKKSM_READER_DB_USER_NAME');
+$dbpass = getenv('YKKSM_READER_DB_USER_PASSWORD');
 $basepath = '';
 $dbname = 'ykksm';
 $dbserver = getenv('MYSQL_HOST');
