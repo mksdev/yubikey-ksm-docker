@@ -6,7 +6,7 @@ if [ "$RESULT" == "${YKKSM_DB_NAME}" ]; then
 else
 	echo "Generating ${YKKSM_DB_NAME} database"
     echo "create database ${YKKSM_DB_NAME}" | $ms
-	$ms ykksm < /usr/share/doc/yubikey-ksm/ykksm-db.sql
+	$ms ${YKKSM_DB_NAME} < /usr/share/doc/yubikey-ksm/ykksm-db.sql
 	
 	echo "Granting ${YKKSM_DB_NAME} access from localhost"
 	{
