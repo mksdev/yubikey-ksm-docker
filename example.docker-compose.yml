@@ -22,6 +22,8 @@ services:
             - ykval2ksm
         ports:
             - 5005:80
+        volumes:
+            - ./data/gnupg:/root/.gnupg
     db-ksm:
         image: mariadb
         restart: unless-stopped

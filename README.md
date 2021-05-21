@@ -5,13 +5,18 @@ Runs yubikey-ksm in docker using mariadb and apache server.
 # To run
 
 ```
-# 1. prepare .env
+# 1a. prepare .env
+cp example.gpg.conf gpg.conf
+# modify gpg.conf
+
+# 1b. prepare gpg
 cp .env.teplate .env
 # modify .env
 
 # 2. setup mysql data directory, or modify docker-compose.yml
 mkdir ./data
 mkdir ./data/mysql
+mkdir ./data/gnupg
 
 # 3. run
 docker-compose up 
